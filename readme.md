@@ -23,7 +23,7 @@ export default function gulpFoo() {
 
 ## API
 
-### `gulpPlugin(name, onFile, onFinish?)`
+### `gulpPlugin(name, onFile, options?)`
 
 Create a Gulp plugin.
 
@@ -41,7 +41,18 @@ Type: `async (file) => file`
 
 The async function called for each [Vinyl file](https://github.com/gulpjs/vinyl) in the stream. Must return a modified or new Vinyl file.
 
-#### onFinish
+#### options
+
+Type: `object`
+
+##### supportsDirectories
+
+Type: `boolean`\
+Default: `false`
+
+Whether the plugin can handle directories.
+
+##### onFinish
 
 Type: `async function * (): void`
 
@@ -56,9 +67,11 @@ export default function gulpFoo() {
 	return gulpPlugin(
 		'gulp-foo',
 		async file => { … },
-		async function * () {
-			yield someVinylFile;
-			yield someVinylFile2;
+		{
+			onFinish: async function * () {
+				yield someVinylFile;
+				yield someVinylFile2;
+			}
 		}
 	);
 }

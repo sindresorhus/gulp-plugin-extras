@@ -1,13 +1,13 @@
 import transformStream from 'easy-transform-stream';
 import PluginError from './plugin-error.js';
 
-export function gulpPlugin(name, onFile, onFinish) {
+export function gulpPlugin(name, onFile, {onFinish, supportsDirectories} = {}) {
 	return transformStream(
 		{
 			objectMode: true,
 		},
 		async file => {
-			if (file.isNull()) {
+			if (file.isNull() && !(supportsDirectories && file.isDirectory())) {
 				return file;
 			}
 
