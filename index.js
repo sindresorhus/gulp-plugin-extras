@@ -24,9 +24,9 @@ export function gulpPlugin(name, onFile, {onFinish, supportsDirectories} = {}) {
 				});
 			}
 		},
-		onFinish && async function * () {
+		onFinish && async function * (stream) {
 			try {
-				yield * onFinish();
+				yield * onFinish(stream);
 			} catch (error) {
 				throw new PluginError(name, error, {showStack: true});
 			}

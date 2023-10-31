@@ -54,7 +54,7 @@ Whether the plugin can handle directories.
 
 ##### onFinish
 
-Type: `async function * (): void`
+Type: `async function * (stream: NodeJS.ReadableStream): void`
 
 An async generator function executed for finalization after all files have been processed.
 

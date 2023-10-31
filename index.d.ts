@@ -31,7 +31,7 @@ export type Options = {
 	}
 	```
 	*/
-	readonly onFinish?: () => AsyncGenerator<File.BufferFile>;
+	readonly onFinish?: (stream: NodeJS.ReadableStream) => AsyncGenerator<File.BufferFile>;
 };
 
 /**
