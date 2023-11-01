@@ -81,10 +81,13 @@ export default class PluginError extends Error {
 			throw new Error('Missing plugin name');
 		}
 
-		console.log(this);
-
 		if (!this.message) {
 			throw new Error('Missing error message');
+		}
+
+		if (message instanceof Error && options_.error.isPresentable) {
+			this.showStack = false;
+			this.showProperties = false;
 		}
 	}
 

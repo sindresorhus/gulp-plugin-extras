@@ -27,6 +27,8 @@ export default function gulpFoo() {
 
 Create a Gulp plugin.
 
+If you throw an error with a `.isPresentable = true` property, it will not display the error stack.
+
 *This does not support streaming.*
 
 #### name
