@@ -29,7 +29,7 @@ Create a Gulp plugin.
 
 If you throw an error with a `.isPresentable = true` property, it will not display the error stack.
 
-*This does not support streaming.*
+*This does not support streaming unless you enable the `supportsAnyType` option.*
 
 #### name
 
@@ -54,6 +54,17 @@ Default: `false`
 
 Whether the plugin can handle directories.
 
+##### supportsAnyType
+
+Type: `boolean`\
+Default: `false`
+
+Whether the plugin can handle any Vinyl file type.
+
+Useful for custom type filtering.
+
+Supersedes `supportsDirectories`.
+
 ##### onFinish
 
 Type: `async function * (stream: NodeJS.ReadableStream): void`
@@ -70,7 +81,7 @@ export default function gulpFoo() {
 		'gulp-foo',
 		async file => { … },
 		{
-			onFinish: async function * () {
+			async * onFinish() {
 				yield someVinylFile;
 				yield someVinylFile2;
 			}
