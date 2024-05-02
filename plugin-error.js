@@ -40,7 +40,7 @@ const ignored = new Set([
 	'domainThrown',
 ]);
 
-const props = [
+const properties = [
 	'fileName',
 	'lineNumber',
 	'message',
@@ -65,9 +65,9 @@ export default class PluginError extends Error {
 			Object.assign(this, options_.error);
 		}
 
-		for (const prop of props) {
-			if (prop in options_) {
-				this[prop] = options_[prop];
+		for (const property of properties) {
+			if (property in options_) {
+				this[property] = options_[property];
 			}
 		}
 
@@ -106,8 +106,8 @@ export default class PluginError extends Error {
 			return '';
 		}
 
-		const relevantProps = Object.keys(this).filter(key => !ignored.has(key));
-		return relevantProps.length > 0 ? `Details:\n${relevantProps.map(prop => `    ${prop}: ${this[prop]}`).join('\n')}` : '';
+		const relevantProperties = Object.keys(this).filter(key => !ignored.has(key));
+		return relevantProperties.length > 0 ? `Details:\n${relevantProperties.map(property => `    ${property}: ${this[property]}`).join('\n')}` : '';
 	}
 
 	toString() {
@@ -116,8 +116,8 @@ export default class PluginError extends Error {
 	}
 }
 
-function formatMessage(message, thisArg) {
-	return `${chalk.red(thisArg.name)} in plugin "${chalk.cyan(thisArg.plugin)}"\n${message}`;
+function formatMessage(message, thisArgument) {
+	return `${chalk.red(thisArgument.name)} in plugin "${chalk.cyan(thisArgument.plugin)}"\n${message}`;
 }
 
 function setDefaults(plugin, message, options) {
