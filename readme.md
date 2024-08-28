@@ -39,9 +39,9 @@ The plugin name.
 
 #### onFile
 
-Type: `async (file) => file`
+Type: `(file) => file`
 
-The async function called for each [Vinyl file](https://github.com/gulpjs/vinyl) in the stream. Must return a modified or new Vinyl file.
+The function called for each [Vinyl file](https://github.com/gulpjs/vinyl) in the stream. Must return a modified or new Vinyl file. May be async.
 
 #### options
 
@@ -67,7 +67,7 @@ Supersedes `supportsDirectories`.
 
 ##### onFinish
 
-Type: `async function * (stream: NodeJS.ReadableStream): void`
+Type: `async function * (stream: NodeJS.ReadableStream): AsyncGenerator<File, never, void>`
 
 An async generator function executed for finalization after all files have been processed.
 

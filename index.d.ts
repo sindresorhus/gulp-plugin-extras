@@ -6,7 +6,7 @@ export type Options = {
 
 	@default false
 	*/
-	readonly supportsDirectories: boolean;
+	readonly supportsDirectories?: boolean;
 
 	/**
 	Whether the plugin can handle any Vinyl file type.
@@ -17,7 +17,7 @@ export type Options = {
 
 	@default false
 	*/
-	readonly supportsAnyType: boolean;
+	readonly supportsAnyType?: boolean;
 
 	/**
 	An async generator function executed for finalization after all files have been processed.
@@ -42,14 +42,16 @@ export type Options = {
 	}
 	```
 	*/
-	readonly onFinish?: (stream: NodeJS.ReadableStream) => AsyncGenerator<File.BufferFile>;
+	readonly onFinish?: (
+		stream: NodeJS.ReadableStream,
+	) => AsyncGenerator<File, never, void>;
 };
 
 /**
 Create a Gulp plugin.
 
 @param name - The plugin name.
-@param onFile - The async function called for each vinyl file in the stream. Must return a modified or new vinyl file.
+@param onFile - The function called for each vinyl file in the stream. Must return a modified or new vinyl file. May be async.
 
 If you throw an error with a `.isPresentable = true` property, it will not display the error stack.
 
@@ -69,6 +71,6 @@ export default function gulpFoo() {
 */
 export function gulpPlugin(
 	name: string,
-	onFile: (file: File.BufferFile) => Promise<File.BufferFile>,
-	options?: Options
+	onFile: (file: File) => File | Promise<File>,
+	options?: Options,
 ): NodeJS.ReadableStream;
