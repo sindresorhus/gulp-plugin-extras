@@ -42,9 +42,7 @@ export type Options = {
 	}
 	```
 	*/
-	readonly onFinish?: (
-		stream: NodeJS.ReadableStream,
-	) => AsyncGenerator<File, never, void>;
+	readonly onFinish?: (stream: NodeJS.ReadableStream) => AsyncGenerator<File, never, void>;
 };
 
 /**
@@ -69,8 +67,60 @@ export default function gulpFoo() {
 }
 ```
 */
-export function gulpPlugin(
-	name: string,
-	onFile: (file: File) => File | Promise<File>,
-	options?: Options,
-): NodeJS.ReadableStream;
+export function gulpPlugin(name: string, onFile: (file: File) => File | Promise<File>, options?: Options): NodeJS.ReadableStream;
+
+export type PluginErrorOptions = Error & {
+	/**
+	The plugin name.
+	*/
+	plugin: string;
+
+	/**
+	Error cause indicating the reason why the current error is thrown.
+	*/
+	cause?: string;
+
+	/**
+	The error currently being thrown.
+	*/
+	error?: Error;
+
+	/**
+	The path to the file that raised the error.
+	*/
+	fileName?: string;
+
+	/**
+	The line number where the error occurred.
+	*/
+	lineNumber?: number;
+
+	/**
+	Whether to show relevant properties in the error message details.
+
+	@default true
+	*/
+	showProperties?: boolean;
+
+	/**
+	Whether to show the error stack trace.
+
+	@default false
+	*/
+	showStack?: boolean;
+};
+
+/**
+ * A plugin error
+ * @class
+ * @constructor
+ * @public
+ *
+ * @example
+import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
+
+throw new PluginError('gulpFoo', 'Some error message');
+ */
+export class PluginError extends PluginErrorOptions {
+	constructor(plugin: string | PluginErrorOptions, message: string | Error | PluginErrorOptions, options?: PluginErrorOptions);
+}

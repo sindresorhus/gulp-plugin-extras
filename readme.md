@@ -11,10 +11,15 @@ npm install gulp-plugin-extras
 ## Usage
 
 ```js
-import {gulpPlugin} from 'gulp-plugin-extras';
+import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
 
-export default function gulpFoo() {
-	return gulpPlugin('gulp-foo', async file => {
+const pluginName = 'gulp-foo';
+
+export default function gulpFoo(requiredParam) {
+	if (!requiredParam) {
+		throw new PluginError(pluginName, 'Missing argument `requiredParam`');
+	}
+	return gulpPlugin(pluginName, async file => {
 		file.contents = await someKindOfTransformation(file.contents);
 		return file;
 	});
@@ -89,3 +94,61 @@ export default function gulpFoo() {
 	);
 }
 ```
+
+### `new PluginError(plugin, message, options?)`
+
+Create a Gulp plugin error.
+
+#### plugin
+
+Type: `string`
+
+The plugin name.
+
+#### message
+
+Type: `string`
+
+The error message.
+
+#### options
+
+Type: `object`
+
+##### fileName
+
+Type: `string`
+
+The path to the file that raised the error.
+
+##### lineNumber
+
+Type: `PositiveInteger`
+
+The line number where the error occurred.
+
+##### error
+
+Type: `Error`
+
+The error currently being thrown.
+
+##### cause
+
+Type: `string`
+
+Error cause indicating the reason why the current error is thrown.
+
+##### showProperties
+
+Type: `boolean`\
+Default: `false`
+
+Whether to show relevant properties in the error message details.
+
+##### showStack
+
+Type: `boolean`\
+Default: `false`
+
+Whether to show the error stack trace.
