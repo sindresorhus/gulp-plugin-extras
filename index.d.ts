@@ -67,7 +67,11 @@ export default function gulpFoo() {
 }
 ```
 */
-export function gulpPlugin(name: string, onFile: (file: File) => File | Promise<File>, options?: Options): NodeJS.ReadableStream;
+export function gulpPlugin(
+	name: string,
+	onFile: (file: File) => File | Promise<File>,
+	options?: Options
+): NodeJS.ReadableStream;
 
 export type PluginErrorOptions = Error & {
 	/**
@@ -121,6 +125,18 @@ import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
 
 throw new PluginError('gulpFoo', 'Some error message');
  */
-export class PluginError extends PluginErrorOptions {
+export class PluginError implements PluginErrorOptions {
+	plugin: string;
+	message: string;
+	name: string;
+	options_: PluginErrorOptions;
+	cause?: string;
+	error?: Error;
+	fileName?: string;
+	lineNumber?: number;
+	showProperties?: boolean;
+	showStack?: boolean;
+	stack?: string;
+
 	constructor(plugin: string | PluginErrorOptions, message: string | Error | PluginErrorOptions, options?: PluginErrorOptions);
 }

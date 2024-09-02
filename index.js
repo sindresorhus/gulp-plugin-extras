@@ -39,3 +39,5 @@ export function gulpPlugin(name, onFile, {
 		},
 	);
 }
+
+export {default as PluginError} from './plugin-error.js';

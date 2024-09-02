@@ -23,8 +23,9 @@
 		"test": "xo && ava && tsc index.d.ts"
 	},
 	"files": [
+		"index.js",
 		"index.d.ts",
-		"index.js"
+		"plugin-error.js"
 	],
 	"keywords": [
 		"gulp",
