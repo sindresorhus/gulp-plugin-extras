@@ -117,9 +117,6 @@ export type PluginErrorOptions = Error & {
 /**
 A plugin error.
 
-@class
-@constructor
-
 @example
 ```
 import {PluginError} from 'gulp-plugin-extras';
