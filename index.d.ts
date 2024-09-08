@@ -115,16 +115,18 @@ export type PluginErrorOptions = Error & {
 };
 
 /**
- * A plugin error
- * @class
- * @constructor
- * @public
- *
- * @example
-import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
+A plugin error.
+
+@class
+@constructor
+
+@example
+```
+import {PluginError} from 'gulp-plugin-extras';
 
 throw new PluginError('gulpFoo', 'Some error message');
- */
+```
+*/
 export class PluginError implements PluginErrorOptions {
 	plugin: string;
 	message: string;
