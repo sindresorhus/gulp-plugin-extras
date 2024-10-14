@@ -19,6 +19,7 @@ export default function gulpFoo(requiredArgument) {
 	if (!requiredArgument) {
 		throw new PluginError(pluginName, 'Missing argument `requiredArgumentr`');
 	}
+
 	return gulpPlugin(pluginName, async file => {
 		file.contents = await someKindOfTransformation(file.contents);
 		return file;
