@@ -96,66 +96,6 @@ export default function gulpFoo() {
 }
 ```
 
-### `new PluginError(plugin: string | PluginErrorOptions, message: string | Error | PluginErrorOptions, options?: PluginErrorOptions)`
+### `PluginError`
 
-Create a Gulp plugin error.
-
-#### plugin
-
-Type: `string | PluginErrorOptions`
-
-The plugin name: either as a plain string or as an option property called `plugin`.
-
-#### message
-
-Type: `string | Error | PluginErrorOptions`
-
-The error message: either a plain string, an Error instance, or as an option property called `message`.
-
-#### options
-
-Type: `object`
-
-##### cause
-
-Type: `string`
-
-Error cause indicating the reason why the current error is thrown.
-
-##### error
-
-Type: `Error`
-
-The error currently being thrown.
-
-##### fileName
-
-Type: `string`
-
-The path to the file that raised the error.
-
-##### lineNumber
-
-Type: `number`
-
-The line number where the error occurred.
-
-##### showProperties
-
-Type: `boolean`\
-Default: `false`
-
-Whether to show relevant properties in the error message details.
-
-##### showStack
-
-Type: `boolean`\
-Default: `false`
-
-Whether to show the error stack trace.
-
-##### stack
-
-Type: `string`
-
-The error stack trace.
+Create a Gulp plugin error. See the [types](index.d.ts) for docs.
