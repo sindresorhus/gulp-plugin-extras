@@ -15,9 +15,9 @@ import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
 
 const pluginName = 'gulp-foo';
 
-export default function gulpFoo(requiredParam) {
-	if (!requiredParam) {
-		throw new PluginError(pluginName, 'Missing argument `requiredParam`');
+export default function gulpFoo(requiredArgument) {
+	if (!requiredArgument) {
+		throw new PluginError(pluginName, 'Missing argument `requiredArgumentr`');
 	}
 	return gulpPlugin(pluginName, async file => {
 		file.contents = await someKindOfTransformation(file.contents);
