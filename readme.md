@@ -11,10 +11,16 @@ npm install gulp-plugin-extras
 ## Usage
 
 ```js
-import {gulpPlugin} from 'gulp-plugin-extras';
+import {gulpPlugin, PluginError} from 'gulp-plugin-extras';
 
-export default function gulpFoo() {
-	return gulpPlugin('gulp-foo', async file => {
+const pluginName = 'gulp-foo';
+
+export default function gulpFoo(requiredArgument) {
+	if (!requiredArgument) {
+		throw new PluginError(pluginName, 'Missing argument `requiredArgument`');
+	}
+
+	return gulpPlugin(pluginName, async file => {
 		file.contents = await someKindOfTransformation(file.contents);
 		return file;
 	});
@@ -39,9 +45,9 @@ The plugin name.
 
 #### onFile
 
-Type: `async (file) => file`
+Type: `(file) => file`
 
-The async function called for each [Vinyl file](https://github.com/gulpjs/vinyl) in the stream. Must return a modified or new Vinyl file.
+The function called for each [Vinyl file](https://github.com/gulpjs/vinyl) in the stream. Must return a modified or new Vinyl file. May be async.
 
 #### options
 
@@ -67,7 +73,7 @@ Supersedes `supportsDirectories`.
 
 ##### onFinish
 
-Type: `async function * (stream: NodeJS.ReadableStream): void`
+Type: `async function * (stream: NodeJS.ReadableStream): AsyncGenerator<File, never, void>`
 
 An async generator function executed for finalization after all files have been processed.
 
@@ -89,3 +95,7 @@ export default function gulpFoo() {
 	);
 }
 ```
+
+### `PluginError`
+
+Create a Gulp plugin error. See the [types](index.d.ts) for docs.
