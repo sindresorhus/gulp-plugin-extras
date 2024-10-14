@@ -137,7 +137,7 @@ export class PluginError implements PluginErrorOptions {
 	showStack?: boolean;
 	stack?: string;
 
-	constructor(plugin: PluginErrorOptions);
-	constructor(plugin: string, message: PluginErrorOptions);
+	constructor(options?: PluginErrorOptions);
+	constructor(plugin: string, options?: PluginErrorOptions);
 	constructor(plugin: string, message: Error | string, options?: PluginErrorOptions);
 }
